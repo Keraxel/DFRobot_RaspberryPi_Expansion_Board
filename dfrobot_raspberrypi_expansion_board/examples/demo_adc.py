@@ -1,13 +1,12 @@
 # -*- coding:utf-8 -*-
 
 '''
-  # demo_pwm.py
+  # demo_adc.py
   #
   # Connect board with raspberryPi.
   # Run this demo.
   #
-  # All pwm channel will set frequency to 1000HZ, duty to 50%, attention: PWM voltage depends on independent power supply
-  # If there is DC motors connect to pwm channle, they will move slow to fast, then loop
+  # All or part adc channels value will print on terminal
   #
   # Copyright   [DFRobot](http://www.dfrobot.com), 2016
   # Copyright   GNU Lesser General Public License
@@ -18,7 +17,7 @@
 
 import time
 
-from DFRobot_RaspberryPi_Expansion_Board import DFRobot_Expansion_Board_IIC as Board
+from ..DFRobot_RaspberryPi_Expansion_Board import DFRobot_Expansion_Board_IIC as Board
 
 board = Board(1, 0x10)    # Select i2c bus 1, set address to 0x10
 
@@ -59,18 +58,15 @@ if __name__ == "__main__":
     time.sleep(2)
   print("board begin success")
 
-  board.set_pwm_enable()                # Pwm channel need external power
-  # board.set_pwm_disable()
-  board.set_pwm_frequency(1000)         # Set frequency to 1000HZ, Attention: PWM voltage depends on independent power supply
+  board.set_adc_enable()
+  # board.set_adc_disable()
 
   while True:
-    print("set all pwm channels duty to 30%")
-    board.set_pwm_duty(board.ALL, 30)   # Set all pwm channels duty
-    time.sleep(1)
+    val = board.get_adc_value(board.A0)   # A0 channels read
+    #val = board.get_adc_value(board.A1)   # A1 channels read
+    #val = board.get_adc_value(board.A2)   # A2 channels read
+    #val = board.get_adc_value(board.A3)   # A3 channels read
+    print("channel: A0, value: %d" %val)
+    print("")
 
-    print("set part pwm channels duty to 60%")
-    board.set_pwm_duty(0, 60)   # Set pwm0 channels duty
-    #board.set_pwm_duty(1, 70)  # Set pwm1 channels duty
-    #board.set_pwm_duty(2, 80)  # Set pwm2 channels duty
-    #board.set_pwm_duty(3, 90)  # Set pwm3 channels duty
-    time.sleep(1)
+    time.sleep(2)
