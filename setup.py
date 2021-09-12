@@ -5,14 +5,14 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "RaspberryPi_Expansion_Board",
+    name = "DFRobot_RaspberryPi_Expansion_Board",
     version = "1.0.0",
     author = "DFRobot",
     description = ("DFRobot RaspberryPi Expansion Board"),
     license = "MIT",
     keywords = "DFRobot,RaspberryPi",
     url = "https://github.com/Keraxel/DFRobot_RaspberryPi_Expansion_Board",
-    packages=['RaspberryPi_Expansion_Board'],
+    packages=['DFRobot_RaspberryPi_Expansion_Board'],
     long_description=read('readme.md'),
     install_requires=[
         "smbus"
